@@ -6,12 +6,5 @@ description: >
 baseurl: "/files/" # the subpath of your site, e.g. /blog/
 url: "https://khaerulilham.github.io/" # the base hostname & protocol for your site
 
-author:
-  fullname: Khaerul Ilham
-  googleplus: https://plus.google.com/100060539421443240956
-  github: khaerulilham
-  twitter: khaerul_ilham76
-  disqus: khaerulilham
-
 #google_analytics: 'UA-XXXXXXXX-X'
 google_verify: X89BreylqE7vwnYaZ15UsSe6iVczxUDGYWAVp9Xjv_M
