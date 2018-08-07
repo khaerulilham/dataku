@@ -1,35 +1,49 @@
-INDEX_TEMPLATE = r"""
-<html>
-<body>
-<h2>${header}</h2>
-<p>
-% for name in names:
-    <li><a href="${name}">${name}</a></li>
-% endfor
-</p>
-</body>
-</html>
-"""
+---
+layout: default
+title: Ruby on Rails development
+---
 
-EXCLUDED = ['index.html']
+{% for post in site.latest_posts %}
+  <div class="entry">
+  	<div class="entrytitle">
+  		<h2><a href="{{ post.url }}">{{ post.title }}</a> <span class="author">{{ post.author }}</span></h2> 
+  		<h3>{{ post.date | date_to_string }} | <a href="{{ post.url }}#disqus_thread" class="commentslink">View comments</a></h3>
+  	</div>
+  	
+  	<div class="entrybody">
+  	  {{ post.content }}
+  	</div>
+  	
+  	<div class="entrymeta">
+  	  <a href="{{ post.url }}#disqus_thread" class="commentslink">View comments</a>
+  	</div>
+  </div>
+{% endfor %}
 
-import os
-import argparse
+{% for post in site.older_posts %}
+  <div class="entry old_entry">
+  	<div class="entrytitle">
+  		<h2><a href="{{ post.url }}">{{ post.title }}</a> <span class="author">{{ post.author }}</span></h2> 
+  		<h3>{{ post.date | date_to_string }} | <a href="{{ post.url }}#disqus_thread" class="commentslink">View comments</a></h3>
+  	</div>
+  </div>
+{% endfor %}
 
-# May need to do "pip install mako"
-from mako.template import Template
+<div class="archive_link">
+  <a href="/archive">View all previous posts in archive &raquo;</a>
+</div>
 
-
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("directory")
-    parser.add_argument("--header")
-    args = parser.parse_args()
-    fnames = [fname for fname in sorted(os.listdir(args.directory))
-              if fname not in EXCLUDED]
-    header = (args.header if args.header else os.path.basename(args.directory))
-    print(Template(INDEX_TEMPLATE).render(names=fnames, header=header))
-
-
-if __name__ == '__main__':
-    main()
+<script type="text/javascript">
+//<![CDATA[
+(function() {
+		var links = document.getElementsByTagName('a');
+		var query = '?';
+		for(var i = 0; i < links.length; i++) {
+			if(links[i].href.indexOf('#disqus_thread') >= 0) {
+				query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		}
+		document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/newbambblog/get_num_replies.js' + query + '"></' + 'script>');
+	})();
+//]]>
+</script>
